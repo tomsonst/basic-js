@@ -1,11 +1,16 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function getSeason(date) {
+  
   if (typeof(date) !== 'object') {
     return 'Unable to determine the time of year!';
-  } else if (!(date.getYear !== 0)){
-    throw new Error('THROWN');
+  } 
+  try {
+    date.getYear() ;
+  } catch (e) {
+    throw new Error();
   }
+
   let month = date.getMonth();
   if (month >= 2 && month <= 4){
     return 'spring';
