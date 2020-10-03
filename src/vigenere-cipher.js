@@ -6,6 +6,9 @@ class VigenereCipheringMachine {
   }
   encrypt(m, k) {
     try {
+      if(this.tm === false){
+        m = m.split("").reverse().join("");
+      } 
     let message = m.toLowerCase();
     let key = k.toLowerCase();
 		if (key.length < message.length) {
@@ -41,6 +44,9 @@ class VigenereCipheringMachine {
 	}
 	decrypt(m, k) {
     try {
+      if(this.tm === false){
+        m = m.split("").reverse().join("");
+      } 
     let message = m.toLowerCase();
     let key = k.toLowerCase();
 		let keyWord = '';
