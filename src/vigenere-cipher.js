@@ -1,6 +1,9 @@
 const CustomError = require("../extensions/custom-error");
 
 class VigenereCipheringMachine {
+  constructor(tm) {
+    this.tm = tm;
+  }
   encrypt(m, k) {
     try {
     let message = m.toLowerCase();
@@ -22,8 +25,8 @@ class VigenereCipheringMachine {
 				result += message[i];
 			} else {
 				let symbolCharCode =
-					(message[i].charCodeAt() - 96 + key[j].charCodeAt() - 96) % 26;
-        	if (symbolCharCode < 1) {
+					((message[i].charCodeAt() - 96) + (key[j].charCodeAt() - 96)) % 26;
+        	if (symbolCharCode <= 1) {
 					symbolCharCode = 26 + symbolCharCode;
 				}
 				let b = String.fromCharCode(symbolCharCode + 95);
@@ -33,7 +36,7 @@ class VigenereCipheringMachine {
 		}
     return(result.toUpperCase());
     } catch(e){
-      throw new Error('THROWN');
+      throw e.message;
     }
 	}
 	decrypt(m, k) {
@@ -66,7 +69,7 @@ class VigenereCipheringMachine {
 		}
     return(result.toUpperCase());
   } catch(e){
-    throw new Error('THROWN');
+    throw e.message;
   }
 	}
 }
